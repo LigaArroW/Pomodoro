@@ -1,0 +1,90 @@
+@font-face {
+  font-family: 'sf-ui-display';
+  src: url("/src/assets/fonts/sf-ui-display-regular.woff") format("woff"), url("/src/assets/fonts/sf-ui-display-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sf-ui-display';
+  src: url("/src/assets/fonts/sf-ui-display-bold.woff") format("woff"), url("/src/assets/fonts/sf-ui-display-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sf-ui-display';
+  src: url("/src/assets/fonts/sf-ui-display-light.woff") format("woff"), url("/src/assets/fonts/sf-ui-display-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sf-ui-display';
+  src: url("/src/assets/fonts/sf-ui-display-medium.woff") format("woff"), url("/src/assets/fonts/sf-ui-display-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sf-ui-display';
+  src: url("/src/assets/fonts/sf-ui-display-thin.woff") format("woff"), url("/src/assets/fonts/sf-ui-display-thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+
+:root {
+  --light-green: #a8b64f;
+  --green: #899441;
+  --red: #dc3e22;
+  --hard-red: #b7280f;
+  --light-red: #EE735D;
+  --pink: #ea8979;
+  --grey: #999;
+  --light-grey: #c4c4c4;
+  --thin-grey: #f4f4f4;
+  --hard-grey: #333;
+  --white: #fff;
+  --black: #000;
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  color: var(--black);
+  box-sizing: border-box;
+  -webkit-font-smothing: antialiased;
+  -moz-osx-font-smothing: grayscale;
+}
+
+body {
+  padding: 0 80px;
+  margin: 0 auto;
+  background-color: var(--thin-grey);
+  font-size: 14px;
+  line-height: 16px;
+  font-family: 'sf-ui-display', sans-serif;
+  font-weight: 400;
+  /* font-family: 'Roboto',serif; */
+}
+
+
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}

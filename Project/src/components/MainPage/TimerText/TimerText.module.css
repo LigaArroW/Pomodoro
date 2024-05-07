@@ -1,0 +1,32 @@
+.timerText {
+    width: 50%;
+    padding-top: 50px;
+
+}
+
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 137%;
+    margin-bottom: 3px;
+}
+
+.list {
+    margin-bottom: 25px;
+    padding-left: 23px;
+    position: relative;
+    width: 87%;
+}
+
+.item {
+    line-height: 206%;
+    font-size: 16px;
+}
+
+.item::before {
+    content: "\2022";
+    color: var(--hard-red);
+    position: absolute;
+    width: 23px;
+    left: 0;
+}
