@@ -1,13 +1,19 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './MainPage.module.css';
-import { TimerText } from './TimerText';
 
-interface MainPageProps { }
 
-export const MainPage: FC<MainPageProps> = () => (
-  <div className={styles.mainPage}>
-    <TimerText />
-  </div>
-);
+interface MainPageProps {
+  children: ReactNode
+}
+
+export const MainPage: FC<MainPageProps> = ({ children }) => {
+  // console.log('render MainPage');
+  
+  return (
+    <div className={styles.mainPage}>
+      {children}
+    </div>
+  )
+};
 
 

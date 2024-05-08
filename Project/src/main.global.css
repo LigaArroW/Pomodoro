@@ -62,7 +62,7 @@
 body {
   padding: 0 80px;
   margin: 0 auto;
-  background-color: var(--thin-grey);
+  background-color: var(--white);
   font-size: 14px;
   line-height: 16px;
   font-family: 'sf-ui-display', sans-serif;
