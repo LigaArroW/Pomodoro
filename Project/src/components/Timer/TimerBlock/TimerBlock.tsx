@@ -1,10 +1,16 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './TimerBlock.module.css';
+import { useTimerControl } from '../../../hooks/useTimerControl';
 
 interface TimerBlockProps { }
 
 export const TimerBlock: FC<TimerBlockProps> = () => {
-  
+  const { timer, paused } = useTimerControl()
+  // const date = new Date(time)
+  const minute = Math.floor(timer / (1000 * 60) % 60)
+  const second = Math.floor(timer / (1000) % 60)
+
+
   return (
     <div className={styles.timerBlock}>
       <div className={styles.headerTime}>
@@ -18,7 +24,7 @@ export const TimerBlock: FC<TimerBlockProps> = () => {
       <div className={styles.content}>
         <div className={styles.timer}>
           <span className={styles.timerClock}>
-            25:00
+            {`${minute}:${second}`}
           </span>
           <span className={styles.timmerAdd}>
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +38,7 @@ export const TimerBlock: FC<TimerBlockProps> = () => {
           <span className={styles.taskName}>Сверстать сайт</span>
         </div>
         <div className={styles.btnContainer}>
-          <button className={styles.btnSucsess}>Пауза</button>
+          <button onClick={() => paused()} className={styles.btnSucsess}>Пауза</button>
           <button className={styles.btnEnd}>Стоп</button>
         </div>
       </div>
