@@ -1,32 +1,52 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import styles from './TimerBlock.module.css';
 import { useTimerControl } from '../../../hooks/useTimerControl';
+import { task, useTask } from '../../../store/useTask';
 
-interface TimerBlockProps { }
 
-export const TimerBlock: FC<TimerBlockProps> = () => {
-  const { timer, paused } = useTimerControl()
-  // const date = new Date(time)
+interface TimerBlockProps {
+  task: task
+}
+
+export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
+
+  const { timer, paused, stop } = useTimerControl(task)
   const minute = Math.floor(timer / (1000 * 60) % 60)
   const second = Math.floor(timer / (1000) % 60)
+  const increment = useTask(state => state.inrement)
+  // useEffect(() => {
+  //   if (tasks.length > 0) {
+  //     const findTask = tasks.find(task => task.active === true)
+  //     findTask && setActiveTask(findTask)
+  //   }
+  // }, [tasks])
+  const handlePause = () => {
+    if (task.id === 0) return
+    paused()
+  }
+  const handleStop = () => {
+    if (task.id === 0) return
+    stop()
+  }
 
 
   return (
     <div className={styles.timerBlock}>
       <div className={styles.headerTime}>
         <span className={styles.headerTitle}>
-          Сверстать сайт
+          {/* Сверстать сайт */}
+          {task.task}
         </span>
         <span className={styles.headerTitle}>
-          Помидор 1
+          Помидор {task.id}
         </span>
       </div>
       <div className={styles.content}>
         <div className={styles.timer}>
           <span className={styles.timerClock}>
-            {`${minute}:${second}`}
+            {`${minute}:${second.toString().length === 1 ? `0${second}` : second}`}
           </span>
-          <span className={styles.timmerAdd}>
+          <span onClick={() => increment(task)} className={styles.timmerAdd}>
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="25" cy="25" r="25" fill="#C4C4C4" />
               <path d="M26.2756 26.1321V33H23.7244V26.1321H17V23.7029H23.7244V17H26.2756V23.7029H33V26.1321H26.2756Z" fill="white" />
@@ -34,12 +54,12 @@ export const TimerBlock: FC<TimerBlockProps> = () => {
           </span>
         </div>
         <div className={styles.tasks}>
-          <span className={styles.taskNumber}>Задача 1 - </span>
-          <span className={styles.taskName}>Сверстать сайт</span>
+          <span className={styles.taskNumber}>Задача {task.id} - </span>
+          <span className={styles.taskName}>{task.task}</span>
         </div>
         <div className={styles.btnContainer}>
-          <button onClick={() => paused()} className={styles.btnSucsess}>Пауза</button>
-          <button className={styles.btnEnd}>Стоп</button>
+          <button onClick={handlePause} className={styles.btnSucsess}>Пауза</button>
+          <button onClick={handleStop} className={styles.btnEnd}>Стоп</button>
         </div>
       </div>
     </div>

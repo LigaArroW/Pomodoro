@@ -26,6 +26,10 @@
     top: -20px;
 }
 
+.disabled span, .disabled span svg path{
+    color: var(--grey);
+    fill: var(--grey);
+}
 
 .disable:hover .img>svg path {
     fill: var(--light-grey);
@@ -42,6 +46,7 @@
     position: relative;
     display: flex;
     gap: 8px;
+    user-select: none;
 }
 
 .item::before {

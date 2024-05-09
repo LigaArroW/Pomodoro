@@ -1,25 +1,51 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import styles from './CreateTask.module.css';
 import { useTask } from '../../../store/useTask';
 import { ShowTask } from '../ShowTask';
+import { DEFAULT_TIME } from '../../../constants/DEFAULT_TIME';
+import { timeFormat } from '../../../utils/timeFormat';
 
 interface CreateTaskProps { }
 
 export const CreateTask: FC<CreateTaskProps> = () => {
   const [value, setValue] = useState<string>('')
+  const [time, setTime] = useState(0)
   const addTask = useTask(state => state.addTask)
   const tasks = useTask(state => state.tasks)
+  const editTaskArr = useTask(state => state.editTasksArr)
+  const ref = useRef<HTMLInputElement>(null)
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault()
-    addTask({ id: tasks.length + 1, task: value, timer: null })
+    const finalTask = editTaskArr.length > 0
+      ?
+      { id: editTaskArr[0].id, task: value, timer: editTaskArr[0].timer, active: editTaskArr[0].active }
+      :
+      { id: tasks.length + 1, task: value, active: tasks.length < 1 ? true : false, timer: DEFAULT_TIME }
+    addTask(finalTask)
+    // addTask({ id: tasks.length + 1, task: value, timer: null })
     setValue('')
   }
+
+  useEffect(() => {
+    const fullTime = tasks.reduce((acc, prev) => (acc += prev.timer), 0)
+    setTime(fullTime)
+  }, [tasks])
+
+  useEffect(() => {
+    if (editTaskArr[0]) setValue(editTaskArr[0].task)
+    if (ref.current) {
+      ref.current.focus()
+      ref.current.selectionStart = ref.current.value.length
+    }
+  }, [editTaskArr])
+
   // console.log('render CreateTask');
 
   return (
     <>
       <form onSubmit={submitHandler} className={styles.createTask} >
         <input
+          ref={ref}
           className={styles.input}
           type="text"
           value={value}
@@ -28,6 +54,9 @@ export const CreateTask: FC<CreateTaskProps> = () => {
         <button type='submit' className={styles.btn}>Добавить</button>
       </form >
       {tasks.length > 0 && tasks.map(task => <ShowTask task={task} key={task.task} />)}
+      <span className={styles.allTime}>
+        {timeFormat(time)}
+      </span>
     </>
   )
 };

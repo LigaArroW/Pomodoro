@@ -1,6 +1,6 @@
 .timerBlock {
     padding-top: 50px;
-
+    user-select: none;
     width: 50%;
 }
 

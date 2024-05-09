@@ -1,11 +1,11 @@
-.createTask{
+.createTask {
     display: flex;
     flex-direction: column;
     gap: 25px;
     margin-bottom: 25px;
 }
 
-.input{
+.input {
     padding: 19px 0;
     padding-left: 15px;
     width: 60%;
@@ -15,16 +15,24 @@
     color: var(--hard-grey);
 }
 
-.input::placeholder{
+.input::placeholder {
     font-weight: 300;
     font-size: 16px;
     color: var(--hard-grey);
 }
 
-.btn{
+.btn {
     width: fit-content;
     padding: 19px 50px;
     background: var(--green);
     color: var(--white);
     font-size: 16px;
+}
+
+.allTime {
+    display: inline-block;
+    margin-top: 19px;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--grey);
 }

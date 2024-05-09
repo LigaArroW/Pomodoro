@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from "react"
+import { DEFAULT_TIME } from "../constants/DEFAULT_TIME"
+import { task, useTask } from "../store/useTask"
 
 
 
-const DEFAULT_TIME = 1000 * 60 * 25
 
-export const useTimerControl = (time: number | undefined = undefined) => {
+export const useTimerControl = (task: task) => {
     const [isRunning, setisRunning] = useState<boolean>(false)
-    const [timer, setTimer] = useState(time ? time : DEFAULT_TIME)
-    const timeRefSeconds = useRef(timer / 1000)
+    const [timer, setTimer] = useState(0)
+    const editTimer = useTask(state => state.editTime)
+    const timeRefSeconds = useRef(timer)
     const intervalRef = useRef(0)
-    // console.log(timer / 60);
+
+    useEffect(() => {
+        setTimer(task.timer)
+    }, [task.timer])
 
     useEffect(() => {
         if (isRunning) {
@@ -28,11 +33,15 @@ export const useTimerControl = (time: number | undefined = undefined) => {
 
     const paused = () => {
         setisRunning(!isRunning)
+        timeRefSeconds.current = timer / 1000
+        editTimer(timer, task.task)
     }
 
     const stop = () => {
-
+        setisRunning(false)
+        setTimer(DEFAULT_TIME)
+        timeRefSeconds.current = timer / 1000
     }
 
-    return { timer, paused }
+    return { timer, paused, stop }
 }
