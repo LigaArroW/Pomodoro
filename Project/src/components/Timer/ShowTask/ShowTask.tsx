@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styles from './ShowTask.module.css';
 import { task, useTask } from '../../../store/useTask';
 import { Dropdown } from '../../Dropdown';
@@ -9,15 +9,21 @@ interface ShowTaskProps {
 }
 
 export const ShowTask: FC<ShowTaskProps> = ({ task }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  // const [isOpen, setIsOpen] = useState<boolean>(false)
   const active = useTask(state => state.activeTask)
+  const { openDropdown, closeDropdown, isOpen } = useTask(state => ({
+    isOpen: state.dropdowns[task.task],
+    openDropdown: state.openDropdown,
+    closeDropdown: state.closeDropdown,
+  }))
+
   const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation()
-
-    setIsOpen(!isOpen)
+    openDropdown(task.task)
+    active(task)
+    // setIsOpen(!isOpen)
   }
 
-  // console.log('render ShowTask');
 
   return (
     <>
@@ -41,7 +47,7 @@ export const ShowTask: FC<ShowTaskProps> = ({ task }) => {
             <circle cx="13" cy="3" r="3" fill="#C4C4C4" />
             <circle cx="23" cy="3" r="3" fill="#C4C4C4" />
           </svg>
-          {isOpen && <Dropdown onClose={() => setIsOpen(false)} task={task} />}
+          {isOpen && <Dropdown onClose={() => closeDropdown(task.task)} task={task} />}
         </span>
       </div>
     </>

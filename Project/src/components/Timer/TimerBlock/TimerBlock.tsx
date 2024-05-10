@@ -14,12 +14,7 @@ export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
   const minute = Math.floor(timer / (1000 * 60) % 60)
   const second = Math.floor(timer / (1000) % 60)
   const increment = useTask(state => state.inrement)
-  // useEffect(() => {
-  //   if (tasks.length > 0) {
-  //     const findTask = tasks.find(task => task.active === true)
-  //     findTask && setActiveTask(findTask)
-  //   }
-  // }, [tasks])
+
   const handlePause = () => {
     if (task.id === 0) return
     paused()
