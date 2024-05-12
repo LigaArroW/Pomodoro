@@ -60,6 +60,7 @@
 }
 
 body {
+  max-width: 1920px;
   padding: 0 80px;
   margin: 0 auto;
   background-color: var(--white);
