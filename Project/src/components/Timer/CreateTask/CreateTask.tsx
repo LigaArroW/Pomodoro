@@ -4,6 +4,7 @@ import { useTask } from '../../../store/useTask';
 import { ShowTask } from '../ShowTask';
 import { DEFAULT_TIME } from '../../../constants/DEFAULT_TIME';
 import { timeFormat } from '../../../utils/timeFormat';
+import { getUniqid } from '../../../utils/getUniqid';
 
 interface CreateTaskProps { }
 
@@ -16,11 +17,12 @@ export const CreateTask: FC<CreateTaskProps> = () => {
   const ref = useRef<HTMLInputElement>(null)
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault()
+    if (!value || value.length < 3) return
     const finalTask = editTaskArr.length > 0
       ?
       { id: editTaskArr[0].id, task: value, timer: editTaskArr[0].timer, active: editTaskArr[0].active }
       :
-      { id: tasks.length + 1, task: value, active: tasks.length < 1 ? true : false, timer: DEFAULT_TIME }
+      { id: getUniqid(tasks), task: value, active: tasks.length < 1 ? true : false, timer: DEFAULT_TIME }
     addTask(finalTask)
     // addTask({ id: tasks.length + 1, task: value, timer: null })
     setValue('')
@@ -29,6 +31,7 @@ export const CreateTask: FC<CreateTaskProps> = () => {
   useEffect(() => {
     const fullTime = tasks.reduce((acc, prev) => (acc += prev.timer), 0)
     setTime(fullTime)
+
   }, [tasks])
 
   useEffect(() => {
@@ -53,7 +56,11 @@ export const CreateTask: FC<CreateTaskProps> = () => {
           placeholder='Название задачи' />
         <button type='submit' className={styles.btn}>Добавить</button>
       </form >
-      {tasks.length > 0 && tasks.map(task => <ShowTask task={task} key={task.task} />)}
+      {tasks.length > 0 && tasks.map(task => {
+        if (task.id === 0) return
+        return <ShowTask task={task} key={task.task} />
+      })}
+
       <span className={styles.allTime}>
         {timeFormat(time)}
       </span>

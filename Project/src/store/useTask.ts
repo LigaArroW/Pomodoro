@@ -23,7 +23,7 @@ export interface task {
     id: number,
     task: string,
     timer: number
-    active?: boolean
+    active: boolean
 }
 
 export const useTask = create<ITasks>()(immer(devtools((set) => ({
@@ -32,7 +32,7 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
     dropdowns: {},
     addTask: (value: task) => set(state => {
         if (state.editTasksArr.length > 0) {
-            const editValue = state.tasks.find(task => task.task === state.editTasksArr[0].task)
+            const editValue = state.tasks.find(task => task.task === (state.editTasksArr[0]).task)
             if (editValue) {
                 editValue.task = value.task
             }
@@ -41,6 +41,10 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
             const findValue = state.tasks.find(val => val.task === value.task)
             findValue ? findValue.task : state.tasks.push({ id: value.id, task: value.task, timer: value.timer, active: value.active })
         }
+        state.tasks.sort((a, b) => {
+            if (a.active) return -1
+            return a.id - b.id
+        })
     }),
     removeTask: (id: number) => set(state => {
         state.tasks = state.tasks.filter(task => id !== task.id)
@@ -56,6 +60,10 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
                 findValue.active = true
             }
         }
+        state.tasks.sort((a, b) => {
+            if (a.active) return -1
+            return a.id - b.id
+        })
     }),
     inrement: (task: task) => set(state => {
         const findValue = state.tasks.find(val => val.task === task.task)

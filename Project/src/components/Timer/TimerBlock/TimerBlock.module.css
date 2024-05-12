@@ -47,6 +47,17 @@
 
 .timmerAdd {
     cursor: pointer;
+
+}
+
+.timmerAdd svg circle {
+    transition: .3s linear;
+}
+
+
+.timmerAdd:hover svg circle {
+    fill: var(--green);
+
 }
 
 .tasks {
