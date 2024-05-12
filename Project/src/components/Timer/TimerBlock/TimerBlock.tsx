@@ -28,7 +28,7 @@ export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
 
   return (
     <div className={styles.timerBlock}>
-      <div className={styles.headerTime}>
+      <div className={`${styles.headerTime} ${!isPaused ? styles.red : styles.green}`}>
         <span className={styles.headerTitle}>
           {/* Сверстать сайт */}
           {task.task}
@@ -39,7 +39,7 @@ export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
       </div>
       <div className={styles.content}>
         <div className={styles.timer}>
-          <span className={styles.timerClock}>
+          <span className={`${styles.timerClock} ${!isPaused ? styles.red : styles.green}`}>
             {`${minute}:${second.toString().length === 1 ? `0${second}` : second}`}
           </span>
           <span onClick={() => increment(task)} className={styles.timmerAdd}>
