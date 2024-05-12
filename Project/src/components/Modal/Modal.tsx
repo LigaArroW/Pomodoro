@@ -4,10 +4,10 @@ import { useTask } from '../../store/useTask';
 
 interface ModalProps {
   setShowModal: () => void
-  taskID: number
+  taskText: string
 }
 
-export const Modal: FC<ModalProps> = ({ setShowModal, taskID }) => {
+export const Modal: FC<ModalProps> = ({ setShowModal, taskText }) => {
   const removeTask = useTask(state => state.removeTask)
   return (
     <div className={styles.modal}>
@@ -16,7 +16,7 @@ export const Modal: FC<ModalProps> = ({ setShowModal, taskID }) => {
         <div className={styles.modalContent}>
           <p className={styles.text}>Удалить задачу?</p>
           <div className={styles.modalBtns}>
-            <button className={styles.yesBtn} onClick={() => removeTask(taskID)}>Удалить</button>
+            <button className={styles.yesBtn} onClick={() => removeTask(taskText)}>Удалить</button>
             <button className={styles.noBtn} onClick={() => setShowModal()}>Отмена</button>
           </div>
         </div>

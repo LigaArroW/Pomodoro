@@ -13,15 +13,15 @@ export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
   const { timer, paused, stop } = useTimerControl(task)
   const minute = Math.floor(timer / (1000 * 60) % 60)
   const second = Math.floor(timer / (1000) % 60)
-  const increment = useTask(state => state.inrement)
+  const increment = useTask(state => state.inrementTime)
 
   const handlePause = () => {
-    if (task.id === 0) return
+    // if (task.id === 0) return
     paused()
     setIsPaused(!isPaused)
   }
   const handleStop = () => {
-    if (task.id === 0) return
+    // if (task.id === 0) return
     stop()
   }
 
@@ -34,7 +34,7 @@ export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
           {task.task}
         </span>
         <span className={styles.headerTitle}>
-          Помидор {task.id}
+          Помидор {task.pomidor}
         </span>
       </div>
       <div className={styles.content}>
@@ -50,7 +50,7 @@ export const TimerBlock: FC<TimerBlockProps> = ({ task }) => {
           </span>
         </div>
         <div className={styles.tasks}>
-          <span className={styles.taskNumber}>Задача {task.id} - </span>
+          <span className={styles.taskNumber}>Задача - </span>
           <span className={styles.taskName}>{task.task}</span>
         </div>
         <div className={styles.btnContainer}>

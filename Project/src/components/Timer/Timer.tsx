@@ -1,14 +1,13 @@
 import { FC, useEffect, useState } from 'react';
-import styles from './Timer.module.css';
-import { TimerText } from './TimerText';
-import { TimerBlock } from './TimerBlock';
 import { task, useTask } from '../../store/useTask';
-import { DEFAULT_TIME } from '../../constants/DEFAULT_TIME';
+import styles from './Timer.module.css';
+import { TimerBlock } from './TimerBlock';
+import { TimerText } from './TimerText';
 
 interface TimerProps { }
 
 export const Timer: FC<TimerProps> = () => {
-  const [activeTask, setActiveTask] = useState<task>({ id: 0, task: 'Добавьте новые задания', timer: DEFAULT_TIME, active: true })
+  const [activeTask, setActiveTask] = useState<task | null>(null)
   const tasks = useTask(state => state.tasks)
 
   useEffect(() => {
@@ -21,9 +20,11 @@ export const Timer: FC<TimerProps> = () => {
   return (
     <div className={styles.timer}>
       <TimerText />
-      <TimerBlock task={activeTask} />
+      {activeTask && <TimerBlock task={activeTask} />}
     </div>
   )
 };
+
+
 
 

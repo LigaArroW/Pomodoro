@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import styles from './Dropdown.module.css';
-import { task, useTask } from '../../store/useTask';
+import { resizePomidor, task, useTask } from '../../store/useTask';
 import { DEFAULT_TIME } from '../../constants/DEFAULT_TIME';
 import { Modal } from '../Modal';
 
@@ -8,13 +8,14 @@ import { Modal } from '../Modal';
 interface DropdownProps {
   onClose: () => void
   task: task
+  change: () => void
 }
 
-export const Dropdown: FC<DropdownProps> = ({ onClose, task }) => {
+export const Dropdown: FC<DropdownProps> = ({ onClose, task, change }) => {
   const [showModal, setShowModal] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const increment = useTask(state => state.inrement)
-  const decrement = useTask(state => state.decrement)
+  const resize = useTask(state => state.resizePomidor)
+
   const editTask = useTask(state => state.editTask)
   useEffect(() => {
     document.addEventListener('click', handleClick)
@@ -28,15 +29,18 @@ export const Dropdown: FC<DropdownProps> = ({ onClose, task }) => {
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation()
+    change()
     editTask(task)
   }
   const handleIncrement = (e: React.MouseEvent) => {
     e.stopPropagation()
-    increment(task)
+    resize(task, resizePomidor.inc)
+    // console.log(task);
+
   }
   const handleDecrement = (e: React.MouseEvent) => {
     e.stopPropagation()
-    decrement(task)
+    resize(task, resizePomidor.dec)
   }
   const handleRemoveTask = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -89,9 +93,11 @@ export const Dropdown: FC<DropdownProps> = ({ onClose, task }) => {
           </li>
         </ul>
       </div>
-      {showModal && <Modal setShowModal={() => setShowModal(false)} taskID={task.id} />}
+      {showModal && <Modal setShowModal={() => setShowModal(false)} taskText={task.task} />}
     </>
   )
 };
+
+
 
 
