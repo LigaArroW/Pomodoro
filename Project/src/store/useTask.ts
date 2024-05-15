@@ -1,7 +1,8 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 import { immer } from "zustand/middleware/immer"
-import { DEFAULT_TIME, MINUTE } from "../constants/DEFAULT_TIME"
+
+
 
 export enum resizePomidor {
     inc = 1,
@@ -16,10 +17,10 @@ interface ITasks {
     removeTask: (text: string) => void
     editTask: (task: task) => void
     activeTask: (task: task) => void
-    inrementTime: (task: task) => void
+    // inrementTime: (task: task) => void
     resizePomidor: (task: task, value: resizePomidor) => void
     // decrement: (task: task) => void
-    editTime: (timer: number, value: string) => void
+    // editTime: (timer: number, value: string) => void
     openDropdown: (taskTitle: string) => void;
     closeDropdown: (taskTitle: string) => void;
 }
@@ -28,7 +29,7 @@ interface ITasks {
 export interface task {
     pomidor: number,
     task: string,
-    timer: number
+    date: string
     active: boolean
 }
 
@@ -45,7 +46,7 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
             state.editTasksArr.splice(0, state.editTasksArr.length)
         } else {
             const findTask = state.tasks.find(task => task.task === value)
-            findTask ?? state.tasks.push({ pomidor: 1, task: value, timer: DEFAULT_TIME, active: state.tasks.length === 0 ? true : false })
+            findTask ?? state.tasks.push({ pomidor: 1, task: value, date: new Date().toLocaleDateString(), active: state.tasks.length === 0 ? true : false })
         }
 
     }),
@@ -68,13 +69,13 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
         //     return a.id - b.id
         // })
     }),
-    inrementTime: (task: task) => set(state => {
-        const findValue = state.tasks.find(val => val.task === task.task)
-        // findValue && findValue.timer && findValue.timer + MINUTE
-        if (findValue && findValue.timer) {
-            findValue.timer += MINUTE
-        }
-    }),
+    // inrementTime: (task: task) => set(state => {
+    //     const findValue = state.tasks.find(val => val.task === task.task)
+    //     // findValue && findValue.timer && findValue.timer + MINUTE
+    //     if (findValue && findValue.timer) {
+    //         findValue.timer += MINUTE
+    //     }
+    // }),
     resizePomidor: (task: task, value: resizePomidor) => set(state => {
         const findValue = state.tasks.find(val => val.task === task.task)
         if (findValue) {
@@ -83,12 +84,12 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
         }
 
     }),
-    editTime: (timer: number, value: string) => set(state => {
-        const findValue = state.tasks.find(val => val.task === value)
-        if (findValue) {
-            findValue.timer = timer
-        }
-    }),
+    // editTime: (timer: number, value: string) => set(state => {
+    //     const findValue = state.tasks.find(val => val.task === value)
+    //     if (findValue) {
+    //         findValue.timer = timer
+    //     }
+    // }),
     openDropdown: (taskTitle: string) => set(state => {
 
         // state.dropdowns = { ...state.dropdowns, [taskTitle]: true };

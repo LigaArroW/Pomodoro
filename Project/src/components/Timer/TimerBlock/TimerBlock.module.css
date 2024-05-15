@@ -16,6 +16,7 @@
 .headerTime.red {
     background: var(--red);
 }
+
 .headerTime.green {
     background: var(--light-green);
 }
@@ -56,6 +57,7 @@
 .timerClock.red {
     color: var(--red);
 }
+
 .timerClock.green {
     color: var(--light-green);
 }
@@ -114,7 +116,13 @@
     color: var(--red);
 }
 
-.btnEnd:hover {
+.disabled {
+    border-color: var(--light-grey);
+    color: var(--light-grey);
+    cursor: not-allowed;
+}
+
+.btnEnd:hover:not(.disabled) {
     background: var(--red);
     color: var(--white);
 }
