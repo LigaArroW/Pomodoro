@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { compareTwoDate } from "../utils/compareTwoDate";
 
 interface IStat {
     timeToJob: number
@@ -12,13 +13,30 @@ interface IStat {
 
 interface IStatistic {
     statiscic: IStat[]
-    addStatistic: (value: IStat) => void
-
+    addStatistic: () => void
+    // addStatistic: (value: { [key in keyof Partial<Omit<IStat, 'date'>>]: number }, date: Date) => void
+    editStatistic: (key: keyof Omit<IStat, 'date'>, value: number) => void
 }
 
-export const useStatistic = () => create<IStatistic>()(immer((devtools((set) => ({
+export const useStatistic = create<IStatistic>()(immer((devtools((set) => ({
     statiscic: [],
-    addStatistic: (value: Omit<IStat, 'date'>) => set(state => {
-        state.statiscic.push({ ...value, date: new Date().toLocaleDateString() })
+    addStatistic: () => set(state => {
+        const findStat = state.statiscic.find(stat => compareTwoDate(stat.date, new Date()))
+        if (findStat) return
+        state.statiscic.push({
+            pomidors: 0,
+            stops: 0,
+            timeToJob: 0,
+            timeToPause: 0,
+            date: new Date().toLocaleDateString()
+        })
+    }),
+    editStatistic: (key: keyof Omit<IStat, 'date'>, value: number) => set(state => {
+        const today = new Date()
+
+        const findStat = state.statiscic.find(stat => compareTwoDate(stat.date, today))
+        if (findStat) {
+            findStat[key] += value
+        }
     })
 })))))

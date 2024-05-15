@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import styles from './CreateTask.module.css';
 import { useTask } from '../../../store/useTask';
 import { ShowTask } from '../ShowTask';
-// import { DEFAULT_TIME } from '../../../constants/DEFAULT_TIME';
+import { DEFAULT_TIME } from '../../../constants/DEFAULT_TIME';
 import { timeFormat } from '../../../utils/timeFormat';
 
 interface CreateTaskProps { }
@@ -22,7 +22,7 @@ export const CreateTask: FC<CreateTaskProps> = () => {
   }
 
   useEffect(() => {
-    const fullTime = tasks.reduce((acc, prev) => (acc += prev.timer * prev.pomidor), 0)
+    const fullTime = tasks.reduce((acc, prev) => (acc += prev.pomidor * DEFAULT_TIME), 0)
     setTime(fullTime)
 
   }, [tasks])

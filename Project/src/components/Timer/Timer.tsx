@@ -9,18 +9,19 @@ interface TimerProps { }
 export const Timer: FC<TimerProps> = () => {
   const [activeTask, setActiveTask] = useState<task | null>(null)
   const tasks = useTask(state => state.tasks)
+  const active = useTask(state => state.activeTask)
 
   useEffect(() => {
     if (tasks.length > 0) {
-      const findTask = tasks.find(task => task.active === true)
+      const findTask = tasks.find(task => task.active === true) ?? active(tasks[0])
       findTask && setActiveTask(findTask)
     }
-  }, [tasks])
+  }, [active, tasks])
 
   return (
     <div className={styles.timer}>
       <TimerText />
-      {activeTask && <TimerBlock task={activeTask} />}
+      {activeTask && tasks.length > 0 ? <TimerBlock task={activeTask} /> : ''}
     </div>
   )
 };

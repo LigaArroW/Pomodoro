@@ -21,6 +21,7 @@ interface ITasks {
     resizePomidor: (task: task, value: resizePomidor) => void
     // decrement: (task: task) => void
     // editTime: (timer: number, value: string) => void
+    decrementPomidor: (task: task) => void
     openDropdown: (taskTitle: string) => void;
     closeDropdown: (taskTitle: string) => void;
 }
@@ -32,6 +33,8 @@ export interface task {
     date: string
     active: boolean
 }
+
+
 
 export const useTask = create<ITasks>()(immer(devtools((set) => ({
     tasks: [],
@@ -50,14 +53,9 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
         }
 
     }),
-    removeTask: (text: string) => set(state => {
-        state.tasks = state.tasks.filter(task => text !== task.task)
-    }),
-    editTask: (task: task) => set(state => {
-        state.editTasksArr.push(task)
-    }),
     activeTask: (task: task) => set(state => {
         const findValue = state.tasks.find(val => val.task === task.task)
+
         if (findValue?.active === false) {
             state.tasks.map(task => task.active = false)
             if (findValue) {
@@ -69,6 +67,13 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
         //     return a.id - b.id
         // })
     }),
+    removeTask: (text: string) => set(state => {
+        state.tasks = state.tasks.filter(task => text !== task.task)
+    }),
+    editTask: (task: task) => set(state => {
+        state.editTasksArr.push(task)
+    }),
+
     // inrementTime: (task: task) => set(state => {
     //     const findValue = state.tasks.find(val => val.task === task.task)
     //     // findValue && findValue.timer && findValue.timer + MINUTE
@@ -101,6 +106,12 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
     }),
     closeDropdown: (taskTitle: string) => set(state => {
         state.dropdowns = { ...state.dropdowns, [taskTitle]: false };
+    }),
+    decrementPomidor: (task: task) => set(state => {
+        const findValue = state.tasks.find(val => val.task === task.task)
+        if (findValue) {
+            findValue.pomidor = findValue.pomidor - 1
+        }
     })
 
 }))))

@@ -6,9 +6,11 @@ import { NotFound } from './components/NotFound'
 import { MainPage } from './components/MainPage'
 import { Timer } from './components/Timer'
 import { Statistic } from './components/Statistic'
+import { useStatistic } from './store/useStatisctic'
 
 function App() {
-
+  const addStat = useStatistic(state => state.addStatistic)
+  addStat()
 
   return (
     <>

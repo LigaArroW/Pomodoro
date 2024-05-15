@@ -1,27 +1,30 @@
-.header{
-    margin: 0 15px 50px 15px;
+.header {
+    /* margin: 0 15px 50px 15px; */
+    padding: 15px 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 10px 63px 0 rgba(0, 0, 0, 0.07);
 }
 
-.link{
+.link {
     display: flex;
     align-items: center;
     gap: 13px;
 }
-.stat{
+
+.stat {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.textLink{
+.textLink {
     color: var(--red);
     font-weight: 300;
     font-size: 24px;
 }
 
-.statText{
+.statText {
     color: var(--red);
 }
