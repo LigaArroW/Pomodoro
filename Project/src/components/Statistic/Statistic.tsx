@@ -6,7 +6,9 @@ interface StatisticProps { }
 export const Statistic: FC<StatisticProps> = () => {
   return (
     <div className={styles.statistic}>
-      Statistic Component
+     <div className={styles.header}>
+      <h2 className={styles.title}>Ваша активность</h2>
+     </div>
     </div>
   )
 };

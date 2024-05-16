@@ -109,7 +109,7 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
     }),
     decrementPomidor: (task: task) => set(state => {
         const findValue = state.tasks.find(val => val.task === task.task)
-        if (findValue) {
+        if (findValue && findValue.pomidor > 0) {
             findValue.pomidor = findValue.pomidor - 1
         }
     })

@@ -4,13 +4,13 @@ import styles from './Timer.module.css';
 import { TimerBlock } from './TimerBlock';
 import { TimerText } from './TimerText';
 
+
 interface TimerProps { }
 
 export const Timer: FC<TimerProps> = () => {
   const [activeTask, setActiveTask] = useState<task | null>(null)
   const tasks = useTask(state => state.tasks)
   const active = useTask(state => state.activeTask)
-
   useEffect(() => {
     if (tasks.length > 0) {
       const findTask = tasks.find(task => task.active === true) ?? active(tasks[0])
@@ -21,7 +21,9 @@ export const Timer: FC<TimerProps> = () => {
   return (
     <div className={styles.timer}>
       <TimerText />
-      {activeTask && tasks.length > 0 ? <TimerBlock task={activeTask} /> : ''}
+      {activeTask && tasks.length > 0 ? <TimerBlock task={activeTask} /> : <TimerBlock
+        task={{ task: 'undefined', pomidor: 0, active: false, date: new Date().toLocaleDateString() }}
+        />}
     </div>
   )
 };

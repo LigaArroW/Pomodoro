@@ -12,7 +12,7 @@ export const useTimerControl = (time: number[],relax:boolean ) => {
     const stat = useStatistic(state=>state.editStatistic)
     
     
-    const control = useCallback((type: 'start'| 'pause' | 'increment' | 'stop' | 'done') => {
+    const control = useCallback((type: 'start'| 'pause' | 'increment' | 'stop' | 'done',pomidors?:number) => {
         switch (type) {
             case 'start':
                 setIsRunning(true)
@@ -30,8 +30,10 @@ export const useTimerControl = (time: number[],relax:boolean ) => {
                 !relax && stat('stops',1)
                 break;
             case 'done':
+                console.log(pomidors);
+                
                 setIsRunning(false);
-                setTimer(relax ? timetoJob : timeToRelax);
+                setTimer(relax ? timetoJob : pomidors && pomidors === 1 ? timetoJob : timeToRelax);
                 setPausedTime(0)
                 !relax && stat('pomidors',1)
         }
