@@ -8,22 +8,29 @@ import { Timer } from './components/Timer'
 import { Statistic } from './components/Statistic'
 import { useStatistic } from './store/useStatisctic'
 
-function App() {
+
+const MainComponent = () => {
   const addStat = useStatistic(state => state.addStatistic)
   addStat()
 
   return (
+    <MainPage>
+      <Routes>
+        <Route path='/' element={<Timer />} />
+        <Route index element={<Timer />} />
+        <Route path='/stat' element={<Statistic />} />
+        <Route path="404" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
+      </Routes>
+    </MainPage>
+  )
+}
+
+function App() {
+  return (
     <>
       <Header />
-      <MainPage>
-        <Routes>
-          <Route path='/' element={<Timer />} />
-          <Route index element={<Timer />} />
-          <Route path='stat' element={<Statistic />} />
-          <Route path="404" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/404" replace />} />
-        </Routes>
-      </MainPage>
+      <MainComponent />
     </>
   )
 }

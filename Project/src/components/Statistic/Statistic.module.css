@@ -9,4 +9,8 @@
     margin-bottom: 30px;
 }
 
+.main{
+    display: flex;
+    gap: 32px;
+}
 

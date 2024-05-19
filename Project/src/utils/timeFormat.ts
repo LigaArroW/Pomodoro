@@ -4,3 +4,5 @@ export const timeFormat = (time: number) => {
     // return `${hour} час ${munites} мин`
     return `${hour > 0 ? hour + ' час' : ''} ${munites > 0 ? munites + 'мин' : ''}`
 }
+
+

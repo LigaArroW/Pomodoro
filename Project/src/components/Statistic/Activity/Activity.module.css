@@ -1,0 +1,79 @@
+.activity {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.dayActivity {
+    padding: 25px;
+    min-height: 260px;
+    background: var(--thin-grey);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 137%;
+    margin-bottom: 14px;
+}
+
+.descript {
+    font-size: 16px;
+    line-height: 175%;
+}
+
+.time {
+    color: var(--red);
+    font-weight: 700;
+}
+
+
+.pomidors {
+    min-height: 179px;
+    background: var(--thin-grey);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.yes {
+    justify-content: flex-end;
+}
+
+.pomidorNo {
+    min-width: 115px;
+    min-height: 115px;
+}
+
+.pomidorBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 24px;
+    gap: 15px;
+    /* margin-top: auto; */
+}
+
+.pomidorYes {}
+
+.pomidorTask {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 137%;
+    color: var(--grey);
+}
+
+.pomidorText {
+    background: var(--red);
+    /* margin-top: auto; */
+    display: inline-block;
+    width: 100%;
+    padding: 9px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 137%;
+    color: var(--white);
+}

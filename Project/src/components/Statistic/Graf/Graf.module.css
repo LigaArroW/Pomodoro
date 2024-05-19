@@ -1,0 +1,11 @@
+.graf {
+    flex: 3;
+}
+
+.barChart {
+    background: var(--thin-grey);
+}
+
+.bar {
+    cursor: pointer;
+}

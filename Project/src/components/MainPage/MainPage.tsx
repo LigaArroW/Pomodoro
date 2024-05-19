@@ -7,7 +7,6 @@ interface MainPageProps {
 }
 
 export const MainPage: FC<MainPageProps> = ({ children }) => {
-  // console.log('render MainPage');
   
   return (
     <div className={styles.mainPage}>

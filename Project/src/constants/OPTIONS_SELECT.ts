@@ -1,5 +1,5 @@
 export const OPTIONS_SELECT = [
-    { value: 'this-week', label: 'Эта неделя' },
-    { value: 'last-week', label: 'Прошлая неделя' },
+    { value: '0-week', label: 'Эта неделя' },
+    { value: '1-week', label: 'Прошлая неделя' },
     { value: '2-week', label: '2 недели назад' }
 ]
