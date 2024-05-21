@@ -17,10 +17,7 @@ interface ITasks {
     removeTask: (text: string) => void
     editTask: (task: task) => void
     activeTask: (task: task) => void
-    // inrementTime: (task: task) => void
     resizePomidor: (task: task, value: resizePomidor) => void
-    // decrement: (task: task) => void
-    // editTime: (timer: number, value: string) => void
     decrementPomidor: (task: task) => void
     openDropdown: (taskTitle: string) => void;
     closeDropdown: (taskTitle: string) => void;
@@ -46,6 +43,7 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
             if (editValue) {
                 editValue.task = value
             }
+
             state.editTasksArr.splice(0, state.editTasksArr.length)
         } else {
             const findTask = state.tasks.find(task => task.task === value)
@@ -62,10 +60,6 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
                 findValue.active = true
             }
         }
-        // state.tasks.sort((a, b) => {
-        //     if (a.active) return -1
-        //     return a.id - b.id
-        // })
     }),
     removeTask: (text: string) => set(state => {
         state.tasks = state.tasks.filter(task => text !== task.task)
@@ -73,14 +67,6 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
     editTask: (task: task) => set(state => {
         state.editTasksArr.push(task)
     }),
-
-    // inrementTime: (task: task) => set(state => {
-    //     const findValue = state.tasks.find(val => val.task === task.task)
-    //     // findValue && findValue.timer && findValue.timer + MINUTE
-    //     if (findValue && findValue.timer) {
-    //         findValue.timer += MINUTE
-    //     }
-    // }),
     resizePomidor: (task: task, value: resizePomidor) => set(state => {
         const findValue = state.tasks.find(val => val.task === task.task)
         if (findValue) {
@@ -89,12 +75,6 @@ export const useTask = create<ITasks>()(immer(devtools((set) => ({
         }
 
     }),
-    // editTime: (timer: number, value: string) => set(state => {
-    //     const findValue = state.tasks.find(val => val.task === value)
-    //     if (findValue) {
-    //         findValue.timer = timer
-    //     }
-    // }),
     openDropdown: (taskTitle: string) => set(state => {
 
         // state.dropdowns = { ...state.dropdowns, [taskTitle]: true };
