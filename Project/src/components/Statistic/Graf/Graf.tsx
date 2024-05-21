@@ -39,6 +39,20 @@ export const Graf: FC<GrafProps> = ({ value }) => {
     addCurenDay(e.date)
   }
 
+  useEffect(() => {
+    const newWeek = weekArr(new Date().toLocaleDateString(), value);
+    const newStaticArr = newWeek.reduce((result: Partial<IStat[] & { day: string }[]> & { active: boolean }[], day) => {
+      const find = statistic.find(stat => stat.date === day.date);
+      if (find) {
+        result.push({ ...day, ...find, active: new Date().toLocaleDateString() === day.date });
+      } else {
+        result.push({ ...day, active: new Date().toLocaleDateString() === day.date });
+      }
+      return result;
+    }, []);
+
+    setStaticArr(newStaticArr);
+  }, [statistic, value]);
 
   useEffect(() => {
     if (ref.current) {
@@ -51,7 +65,7 @@ export const Graf: FC<GrafProps> = ({ value }) => {
     addCurenDay(new Date().toLocaleDateString())
 
     // setValueWeek(value)
-   
+
 
   }, [])
 
@@ -69,7 +83,7 @@ export const Graf: FC<GrafProps> = ({ value }) => {
         <YAxis dataKey={'timeToJob'}
           orientation='right'
           // mirror
-          tickFormatter={timeFormat}
+          tickFormatter={(value) => timeFormat(value)}
           padding={{ top: 67 }}
           width={80}
           axisLine={false}

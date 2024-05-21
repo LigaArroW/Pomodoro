@@ -9,8 +9,8 @@
     margin-bottom: 30px;
 }
 
-.main{
+.main {
     display: flex;
     gap: 32px;
+    margin-bottom: 32px;
 }
-

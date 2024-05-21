@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import styles from './Dropdown.module.css';
 import { resizePomidor, task, useTask } from '../../store/useTask';
-import { DEFAULT_TIME } from '../../constants/DEFAULT_TIME';
 import { Modal } from '../Modal';
 
 
@@ -59,7 +58,7 @@ export const Dropdown: FC<DropdownProps> = ({ onClose, task, change }) => {
             </span>
             <span className={styles.text}>Увеличить</span>
           </li>
-          <li onClick={handleDecrement} className={`${styles.item} ${task.timer <= DEFAULT_TIME && styles.disabled}`}>
+          <li onClick={handleDecrement} className={`${styles.item} ${task.pomidor === 1 && styles.disabled}`}>
             <span className={styles.img}>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                 <g clipPath="url(#clip0_35_150)">

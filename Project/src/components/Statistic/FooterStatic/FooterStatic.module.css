@@ -1,0 +1,54 @@
+.footerStatic {
+    display: flex;
+    gap: 32px;
+}
+
+.footerStatic>* {
+    flex-grow: 1;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.block {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 137%;
+}
+
+.result {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 100%;
+}
+
+.focus {
+    background-color: #ffdda9;
+
+}
+
+.pause {
+    background-color: #dfdcfe;
+}
+
+.stop {
+    background-color: #c5f1ff;
+}
+
+
+.noActive {
+    background-color: var(--thin-grey) !important;
+}
+
+.noActive path {
+    stroke: var(--light-grey);
+
+}

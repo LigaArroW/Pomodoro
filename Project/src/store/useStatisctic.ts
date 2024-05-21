@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { persist } from "zustand/middleware";
 import { compareTwoDate } from "../utils/compareTwoDate";
 import { MINUTE } from "../constants/DEFAULT_TIME";
 
@@ -22,7 +23,7 @@ interface IStatistic {
     addCurentDay: (date: string) => void
 }
 
-export const useStatistic = create<IStatistic>()(immer((devtools((set) => ({
+export const useStatistic = create<IStatistic>()(immer((devtools(persist((set) => ({
     statiscic: [
         { date: "20.05.2024", pomidors: 10, stops: 3, timeToJob: MINUTE * 60 * 5, timeToPause: 20000 },
         { date: "21.05.2024", pomidors: 5, stops: 0, timeToJob: MINUTE * 60, timeToPause: 0 },
@@ -55,10 +56,10 @@ export const useStatistic = create<IStatistic>()(immer((devtools((set) => ({
     }),
     addCurentDay: (date: string) => set(state => {
         const stat = state.statiscic.find(stat => stat.date === date)
-        
+
         if (stat) {
             if (state.curentDay.length > 0) state.curentDay.pop()
             state.curentDay.push(stat)
         }
     })
-})))))
+}), { name: 'statistic', version: 1, getStorage: () => localStorage })))))
