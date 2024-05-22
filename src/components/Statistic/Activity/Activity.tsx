@@ -29,13 +29,13 @@ export const Activity: FC<ActivityProps> = () => {
           ?
           <>
             <div className={styles.pomidorBlock}>
-              <img src="src/assets/tomato_1.svg" className={styles.pomidorYes} />
+              <img src="/Pomodoro/public/tomato_1.svg" className={styles.pomidorYes} />
               <span className={styles.pomidorTask}>x {curentDay[0].pomidors}</span>
             </div>
             <span className={styles.pomidorText}>{curentDay[0].pomidors} помидора</span>
           </>
           :
-          <img src="/src/assets/tomato_2.svg" className={styles.pomidorNo} />
+          <img src="/Pomodoro/public/tomato_2.svg" className={styles.pomidorNo} />
         }
 
       </div>
