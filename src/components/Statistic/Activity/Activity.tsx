@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styles from './Activity.module.css';
 import { useStatistic } from '../../../store/useStatisctic';
 import { timeFormat } from '../../../utils/timeFormat';
-import pomidor1 from '../../../assets/pomidor1.svg'
+
 
 interface ActivityProps { }
 
@@ -25,12 +25,12 @@ export const Activity: FC<ActivityProps> = () => {
         </p>
       </div>
 
-      <div className={`${styles.pomidors} ${(curentDay.length > 0 && curentDay[0].pomidors > 0) ? styles.yes : ''}`}>
+      <div className={`${styles.pomidors} ${(curentDay.length > 0 && curentDay[0].pomidors > 0 )? styles.yes : ''}`}>
         {curentDay[0] && curentDay[0].pomidors > 0
           ?
           <>
             <div className={styles.pomidorBlock}>
-              <img src={`url("${pomidor1}")`} className={styles.pomidorYes} />
+              <img src={'/tomato_1.svg?url'} className={styles.pomidorYes} />
               <span className={styles.pomidorTask}>x {curentDay[0].pomidors}</span>
             </div>
             <span className={styles.pomidorText}>{curentDay[0].pomidors} помидора</span>
