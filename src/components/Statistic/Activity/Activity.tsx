@@ -24,18 +24,18 @@ export const Activity: FC<ActivityProps> = () => {
         </p>
       </div>
 
-      <div className={`${styles.pomidors} ${curentDay.length > 0 ? styles.yes : ''}`}>
-        {curentDay[0]
+      <div className={`${styles.pomidors} ${(curentDay.length > 0 && curentDay[0].pomidors > 0 )? styles.yes : ''}`}>
+        {curentDay[0] && curentDay[0].pomidors > 0
           ?
           <>
             <div className={styles.pomidorBlock}>
-              <img src="/Pomodoro/public/tomato_1.svg" className={styles.pomidorYes} />
+              <img src={'/tomato_1.svg?url'} className={styles.pomidorYes} />
               <span className={styles.pomidorTask}>x {curentDay[0].pomidors}</span>
             </div>
             <span className={styles.pomidorText}>{curentDay[0].pomidors} помидора</span>
           </>
           :
-          <img src="/Pomodoro/public/tomato_2.svg" className={styles.pomidorNo} />
+          <img src={'/tomato_2.svg?url'} className={styles.pomidorNo} />
         }
 
       </div>
