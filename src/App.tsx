@@ -15,8 +15,8 @@ const MainComponent = () => {
 
   return (
     <MainPage>
-      <Routes>
-        <Route path='Pomodoro/' element={<Timer />} />
+      <Routes >
+        <Route path='/' element={<Timer />} />
         <Route index element={<Timer />} />
         <Route path='stat' element={<Statistic />} />
         <Route path="404" element={<NotFound />} />
