@@ -21,7 +21,7 @@ export const Activity: FC<ActivityProps> = () => {
           {dayWeek && dayWeek.toLocaleDateString('ru-RU', { weekday: 'long' })}
         </h2>
         <p className={styles.descript}>Вы работали над задачами в течении
-          <span className={styles.time}> {curentDay[0] ? timeFormat(curentDay[0].timeToJob) : 'Нет данных'}</span>
+          <span className={styles.time}> {curentDay[0] ? timeFormat(curentDay[0].timeToJob,true) : 'Нет данных'}</span>
         </p>
       </div>
 
