@@ -18,7 +18,7 @@ const MainComponent = () => {
       <Routes >
         <Route path='/' element={<Timer />} />
         <Route index element={<Timer />} />
-        <Route path='stat' element={<Statistic />} />
+        <Route path='/stat' element={<Statistic />} />
         <Route path="404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
