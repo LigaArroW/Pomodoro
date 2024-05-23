@@ -20,8 +20,8 @@ export const Activity: FC<ActivityProps> = () => {
         <h2 className={styles.title}>
           {dayWeek && dayWeek.toLocaleDateString('ru-RU', { weekday: 'long' })}
         </h2>
-        <p className={styles.descript}>{curentDay[0].timeToJob > 0 ? 'Вы работали над задачами в течении' : ''}
-          <span className={styles.time}> {curentDay[0].timeToJob > 0 ? timeFormat(curentDay[0].timeToJob, true) : 'Нет данных'}</span>
+        <p className={styles.descript}>{curentDay[0].timeToJob > 0 ? 'Вы работали над задачами в течении' : 'Нет данных'}
+          <span className={styles.time}> {curentDay[0].timeToJob > 0 ? timeFormat(curentDay[0].timeToJob, true) : ''}</span>
         </p>
       </div>
 
